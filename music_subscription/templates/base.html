@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }} " type="text/css" media="all" />
+<script src="{{ url_for('static', filename='jquery-3.6.0.js') }}"></script>
+</head>
+
+<body>
+    <a href="/"><img src="static/SoundStream.jpg" alt="SoundStream"/></a>
+    <h3>Online Music Subscriptions</h3>
+
+<ul>
+  <li><a href="/">Home</a></li>
+  {% if session['loggedin'] == True %} 
+  <li><a href="/logout">Logout</a></li>
+  {% else %}
+  <li><a href="/login">Login/Register</a></li>
+  {% endif %}
+</ul>
+
+{% block body %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>

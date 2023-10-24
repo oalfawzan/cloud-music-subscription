@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+	<body>
+        {% block body %}
+        <div class="one">{{ msg }}</div>
+        <div class="two">Subscriptions</div>
+        <table class="center">
+            <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Year</th>
+                  <th>Image</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for sub in sub_list %}
+                <tr>
+                    <td>{{ sub['title'] }}</td>
+                    <td>{{ sub['artist'] }}</td>
+                    <td>{{ sub['year'] }}</td>
+                    <td>
+                        <img src="{{ sub.image }}" width="100" height="100">
+                    </td>
+                    <td>
+                        {% if session['loggedin'] == True %}
+                        <form method="POST" action="/remove">
+                            <input type="hidden" name="title" value="{{ sub['title'] }}">
+                            <input type="hidden" name="artist" value="{{ sub['artist'] }}">
+                            <input type="hidden" name="year" value="{{ sub['year'] }}">
+                            <input type="hidden" name="image" value="{{ sub['image'] }}">
+                            <button type="submit">Remove</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+          <center><p>{{ query_msg }}</p></center>
+        <div class="three">Query</div>
+        <form action="{{ url_for('query') }}">
+            <a>Title:</a>
+            <input type="text" name="title" placeholder="e.g. American Girl" id="title">
+            <a>Artist:</a>
+            <input type="text" name="artist" placeholder="e.g. Tom Petty" id="artist">
+            <a>Year:</a>
+            <input type="text" name="year" placeholder="e.g. 1977" id="year">
+        <input type="submit" value="Search">
+        </form>
+    <br>
+    {% if results %}
+    <table class="center">
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Year</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result['title'] }}</td>
+                <td>{{ result['artist'] }}</td>
+                <td>{{ result['year'] }}</td>
+                <td>
+                    <img src="{{ result.image_url }}" width="100" height="100">
+                </td>
+                <td>
+                    {% if session['loggedin'] == True %}
+                    <form method="POST" action="/subscribe">
+                        <input type="hidden" name="title" value="{{ result['title'] }}">
+                        <input type="hidden" name="artist" value="{{ result['artist'] }}">
+                        <input type="hidden" name="year" value="{{ result['year'] }}">
+                        <input type="hidden" name="image" value="{{ result['image_url'] }}">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+      {% elif no_results %}
+   <center>{{ no_results }}</center>
+      {% endif %}
+
+
+        {% endblock %}
+	</body>
+</html>

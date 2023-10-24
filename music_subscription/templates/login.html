@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+        {% block body %}
+			<center><h1>Login</h1></center>
+			<form action="{{ url_for('login') }}" method="post">
+                    <input type="text" name="email" placeholder="Email" id="email" required>
+                    <br>
+                    <input type="password" name="password" placeholder="Password" id="password" required>
+                <br>
+                <br>
+				<input type="submit" value="Sign in">
+                <div>{{ msg }}</div>
+			</form>
+            <br>
+            <center><a>You don't have an account?</a> <a href="{{ url_for('register') }}">Register</a></center>
+        {% endblock %}
+	</body>
+</html>
