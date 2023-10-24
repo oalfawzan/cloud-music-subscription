@@ -16,7 +16,7 @@ This project is an online music subscription application developed using Python,
 ## Setup and Running
 
 1. **Set up AWS Credentials**:
-Replace the placeholders in the `app.py` with your AWS credentials.
+Replace the placeholders in the `music_subscription/app.py` with your AWS credentials.
 ```
 region_name='us-east-1',
 aws_access_key_id='######',
