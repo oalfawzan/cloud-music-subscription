@@ -50,7 +50,7 @@ aws_session_token='######'
 - Deploy the application on the server and ensure it's accessible via the root Public IPv4 DNS of the EC2 instance.
 
 ## Acknowledgements
-This project was developed as part of the COSC2626/2640 Cloud Computing course at RMIT.
+This project was developed as part of the Cloud Computing course at RMIT.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
